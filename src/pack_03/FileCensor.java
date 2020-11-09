@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class FileCensor {
 
 		String[] censoredWords = fillWithCensoredWords("./resources/insultos.txt");
 
-		System.out.println(censoredWords.length);
+		System.out.println(censoredWords.length + " Insultos en el diccionario");
 		censorFile("./resources/Quijote.txt", censoredWords);
 
 	}
@@ -64,6 +65,9 @@ public class FileCensor {
 		File fileIn = new File(inputFilePath);
 		File fileOut = new File(fileIn.getParent() + "/censuredText.txt");
 
+		if (fileOut.exists()) {
+			fileOut.delete();
+		}
 		// ArrayList to store index of blanks in the text
 		ArrayList<Integer> spacesIndex = new ArrayList<Integer>();
 
