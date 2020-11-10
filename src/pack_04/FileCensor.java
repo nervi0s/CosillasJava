@@ -1,4 +1,4 @@
-package pack_03;
+package pack_04;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,11 +7,11 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+import pack_03.CensorWords;
+
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.io.IOException;
-
-import pack_02.CensorWords;
 
 public class FileCensor {
 
