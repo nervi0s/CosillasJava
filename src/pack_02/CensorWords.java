@@ -8,7 +8,7 @@ public class CensorWords {
 	public static void main(String[] args) {
 
 		String[] words = { "comepiñas", "feo", "loco", "test" };
-		String str = "hola amigo loco cómo estás";
+		String str = "hola amigo loco, cómo estás?";
 
 		System.out.println(censor(str, words));
 	}
@@ -27,24 +27,29 @@ public class CensorWords {
 		for (int[] arr : matches) {
 			System.out.println(Arrays.toString(arr));
 		}
-
+		
+		// Change each character of the censored word in raw string with 'x'
 		for (int i = 0; i < matches.size(); i++) {
 			StringBuilder strBuilder = new StringBuilder(stringRaw);
 			for (int j = matches.get(i)[0]; j < matches.get(i)[0] + matches.get(i)[1]; j++) {
 				// System.out.println(j);
 				strBuilder.setCharAt(j, 'x');
 			}
-			stringRaw = strBuilder.toString(); // Change each character of the censored word in raw string with 'x'
+			stringRaw = strBuilder.toString();
 		}
 
 		return stringRaw;
 
 	}
 
+	/*
+	 * Return an ArrayList of int[] which store index and length of censored word
+	 * presents in the target string
+	 */
 	public static ArrayList<int[]> indexAndLengthOfMatches(String str, String strTofind) {
 		ArrayList<int[]> matches = new ArrayList<int[]>();
 		String acumulator = "";
-		boolean allowFill = false;
+		boolean allowFill = false; // Used to allow or not fill the String accumulator
 		boolean allowModifyIndex = true;
 		int index = 0;
 
@@ -65,18 +70,21 @@ public class CensorWords {
 				allowFill = false;
 				allowModifyIndex = true;
 			}
+
+			// Allows add the pair data found to the ArrayList
 			if (strTofind.length() == acumulator.length() && allowFill) {
-				int[] data = { index, strTofind.length() };
-				matches.add(data);
-				System.out.println(strTofind);
-				// System.out.println("yes" + " " + index + " " + strTofind.length());
-				allowFill = false;
-				allowModifyIndex = true;
+				int[] data = { index, strTofind.length() }; // Store pair data
+				matches.add(data); // Add pair data
+				System.out.print(strTofind + ": ");
+				// System.out.println("Empieza en el índice: " + index + " Con longitud: " + strTofind.length());
+				allowFill = false; // Reset
+				allowModifyIndex = true; // Reset
 			}
 		}
 		return matches;
 	}
-
+	
+	// Check if a letter or a word is substring of other word, from left to right
 	public static boolean isSubstring(String source, String toFind) {
 
 		if (source.length() > toFind.length()) { // Check if length is greater
@@ -91,7 +99,7 @@ public class CensorWords {
 			if (letter.equalsIgnoreCase(toFindSplitted[i])) {
 				isOk = true;
 			} else {
-				return false;
+				return false; // If one character doesn't match with the checking, exit returned false
 			}
 		}
 		return isOk;
