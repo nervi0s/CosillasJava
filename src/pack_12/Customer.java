@@ -15,6 +15,13 @@ public class Customer extends Thread {
 	@Override
 	public void run() {
 		depositInBankAccount(100);
+		/// Demora de 1 sec para hacer el otro procedimiento
+		try {
+			sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		/// Fin de la demora
 		withdrawFromBankAccount(200);
 	}
 

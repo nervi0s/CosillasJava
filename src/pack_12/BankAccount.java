@@ -29,13 +29,19 @@ public class BankAccount {
 
 	// En una cuenta se pueden hacer depósitos
 	public void deposit(int amount) {
-		balance += amount;
-		System.out.println(Thread.currentThread().getName() + " está ingresando en la cuenta: " + accountNumber
-				+ ". La cantidad de " + amount + " €. El saldo actualizado de la cuenta es: " + balance + " €.");
+		synchronized (this) {
+			balance += amount;
+			System.out.println(Thread.currentThread().getName() + " está ingresando en la cuenta: " + accountNumber
+					+ ". La cantidad de " + amount + " €. El saldo actualizado de la cuenta es: " + balance + " €.");
+		}
 	}
 
+	// Un método sincronizado (abajo) es equivalente a un bloque sincronizado
+	// (arriba) si el bloque sincronizado abarca todo el cuerpo del método y como
+	// objeto locker se pasa la instancia de la clase
+
 	// En una cuenta se pueden hacer retiradas de dinero
-	public Integer withdraw(int amount) {
+	synchronized public Integer withdraw(int amount) {
 		System.out.println(Thread.currentThread().getName() + " está intentado retirar de la cuenta: " + accountNumber
 				+ ". La cantidad de: " + amount + " €.");
 		// Si no tenemos saldo suficiente mostramos un error y retornamos 0 €.

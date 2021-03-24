@@ -6,6 +6,10 @@ public class Principal {
 
 		Bank bank = Bank.getInstance();
 
+		// Ambos clientes comparten el mismo objeto, en este caso es un banco, pero más
+		// en el fondo el objeto compartido es un objeto del tipo BankAccount que hemos
+		// sicronizado
+
 		Customer user1 = new Customer("Peter", bank);
 		Customer user2 = new Customer("Homer", bank);
 
