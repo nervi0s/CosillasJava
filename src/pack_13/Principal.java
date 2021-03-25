@@ -8,24 +8,24 @@ import java.util.concurrent.Future;
 public class Principal {
 
 	public static void main(String[] args) {
+		// Usatemos este objeto como ayuda para saber si hemos obtenido el futuro o no
 		boolean[] completed = { false };
 
 		ExecutorService es = Executors.newFixedThreadPool(4);
 
-		Future<Integer> f = es.submit(() -> {
+		Future<Integer> futuro = es.submit(() -> {// Funcion lambda para crear un Callable
 			for (int i = 0; i < 10; i++) {
 				System.out.println(Thread.currentThread().getName() + " hola " + i);
 			}
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return 1;
+			return 65; // Retornamos algo de prueba para ver como funciona el retorno de un Future
 		});
 
-		System.out.println(f.isDone());
+		completed[0] = futuro.isDone();
 
 		if (!completed[0]) {
 			es.submit(() -> {
@@ -41,39 +41,22 @@ public class Principal {
 		}
 
 		try {
-			System.out.println(f.get());
-			completed[0] = true;
+			System.out.println(futuro.get()); // El método get() espera y pausa si es necesrio el hilo al que lo llama
+												// hasta obtener el valor del futuro
+			completed[0] = true; // Se cambia a true para que el hilo que mostraba es mensaje esperando deje de
+									// hacerlo
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println(f.isDone());
+		System.out.println(futuro.isDone());
 
 		es.shutdown();
 
-		System.out.println(Thread.currentThread().getName() + " lol");
-		
-		System.out.println(Message.getInstance());
+		System.out.println(Thread.currentThread().getName() + " : fin del programa");
 
 	}
 
-}
-
-class Message {
-
-	private static Message instance;
-
-	private Message() {
-		if (instance != null) {
-			;
-		} else {
-			instance = new Message();
-		}
-	}
-
-	public static Message getInstance() {
-		return new Message();
-	}
 }
