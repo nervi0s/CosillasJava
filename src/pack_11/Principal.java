@@ -40,4 +40,21 @@ class ParImparHilo extends Thread {
 			}
 		}
 	}
+
+//	// Otra solucion
+//	@Override
+//	public void run() {
+//		while (true) {
+//			synchronized (ParImparHilo.class) {
+//				System.out.println(getName() + " -> " + intObject++);
+//				try {
+//					Thread.sleep(1000);
+//					ParImparHilo.class.notifyAll();
+//					ParImparHilo.class.wait();
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	}
 }
