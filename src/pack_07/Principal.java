@@ -12,7 +12,8 @@ public class Principal {
 		String apellido = sc.nextLine();
 		System.out.println("Introduce fecha nacimiento (dd/mm/aaaa):");
 		String fecha = sc.nextLine();
-
+		sc.close();
+		
 		FrecuenciasCardiacas persona = new FrecuenciasCardiacas(nombre, apellido, fecha);
 		System.out.println(persona);
 		System.out.println("Edad: " + persona.getEdad());
