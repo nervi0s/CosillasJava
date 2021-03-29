@@ -3,11 +3,9 @@ package pack_16;
 public class Producer extends Thread {
 
 	private Deposit deposit;
-	private String name;
 
 	public Producer(String name, Deposit deposit) {
 		super(name);
-		this.name = name;
 		this.deposit = deposit;
 	}
 
@@ -16,9 +14,8 @@ public class Producer extends Thread {
 
 		for (;;) {
 			try {
-				sleep(0);
+				sleep(1000); // Tiempo demora para producir
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			produceItem();
@@ -27,8 +24,8 @@ public class Producer extends Thread {
 	}
 
 	public void produceItem() {
-		int randomItem = (int) (Math.random() * 21);
+		int randomItem = (int) (Math.random() * 21); // Se produce un número random entre 0 y 20
 		deposit.putItem(randomItem);
-
 	}
+
 }
