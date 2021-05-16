@@ -1,5 +1,7 @@
 package pack_24;
 
+import java.security.SecureRandom;
+
 public class Dado {
 
 	public enum CaraDado {
@@ -27,7 +29,8 @@ public class Dado {
 
 	// Simula lanzamiento del dado y asigda un valor enum a la cara superior
 	public void lanzarDado() {
-		int randonIndex = (int) Math.floor((Math.random() * 6));
+		SecureRandom random = new SecureRandom();
+		int randonIndex = random.nextInt(6);
 		caraSuperior = carasDelDado[randonIndex];
 	}
 
