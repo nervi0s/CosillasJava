@@ -3,7 +3,7 @@ package pack_24;
 public class Dado {
 
 	public enum CaraDado {
-		A(1), B(2), C(3), D(4), E(4), F(5), G(5);
+		A(1), B(2), C(3), D(4), E(5), F(6);
 
 		private final int valor;
 
@@ -27,11 +27,15 @@ public class Dado {
 
 	// Simula lanzamiento del dado y asigda un valor enum a la cara superior
 	public void lanzarDado() {
-		int randonIndex = (int) Math.floor((Math.random() * 6) + 1);
+		int randonIndex = (int) Math.floor((Math.random() * 6));
 		caraSuperior = carasDelDado[randonIndex];
 	}
 
 	public int getValorCaraSuperior() {
 		return caraSuperior.getValor();
+	}
+	
+	public int getId() {
+		return id;
 	}
 }
